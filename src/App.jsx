@@ -1,27 +1,29 @@
 import { useState } from 'react'
-import NavBar from './components/NavBar'
-import ItemListContainer from './components/ItemListContainer'
-import MusicPlayer from './components/MusicPlayer'
+import NavBar from './components/layout/NavBar'
+import ItemListContainer from './components/pages/ItemListContainer'
+import MusicPlayer from './components/common/MusicPlayer'
 import './index.css'
-
-const PRODUCTS = [
-  { id: 1, name: 'Remera', price: 20 },
-  { id: 2, name: 'Pantalón', price: 35 },
-  { id: 3, name: 'Zapatillas', price: 50 },
-  { id: 4, name: 'Campera', price: 80 },
-  { id: 5, name: 'Gorra', price: 15 },
-  { id: 6, name: 'Bufanda', price: 18 },
-  { id: 7, name: 'Medias', price: 8 },
-  { id: 8, name: 'Short', price: 22 },
-  { id: 9, name: 'Camisa', price: 30 },
-  { id: 10, name: 'Cinturón', price: 12 }
-];
+import { products as INITIAL_PRODUCTS } from './data/products'
 
 function App() {
   const [cart, setCart] = useState([]);
+  const [products, setProducts] = useState(INITIAL_PRODUCTS);
 
   const addToCart = (product) => {
-    setCart([...cart, product]);
+    // Verifica si hay stock disponible
+    const prodIndex = products.findIndex(p => p.id === product.id);
+    if (products[prodIndex].stock > 0) {
+      // Disminuye el stock
+      const updatedProducts = [...products];
+      updatedProducts[prodIndex] = {
+        ...updatedProducts[prodIndex],
+        stock: updatedProducts[prodIndex].stock - 1
+      };
+      setProducts(updatedProducts);
+      setCart([...cart, product]);
+    } else {
+      alert("No hay stock disponible de este producto.");
+    }
   };
 
   return (
@@ -30,7 +32,7 @@ function App() {
       <MusicPlayer />
       <ItemListContainer
         greeting="¡Bienvenido a la tienda!"
-        products={PRODUCTS}
+        products={products}
         addToCart={addToCart}
       />
     </div>

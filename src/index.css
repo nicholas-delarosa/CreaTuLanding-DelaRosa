@@ -51,7 +51,6 @@ body {
 }
 
 .button {
-  margin-left: 1rem;
   padding: 0.5rem 1.2rem;
   background: linear-gradient(90deg, #6366f1 0%, #3730a3 100%);
   color: #f3f4f6;
@@ -195,7 +194,7 @@ body {
 }
 
 .music-player .button {
-  font-size: 1rem;
+  font-size: 1.1rem;
   letter-spacing: 0.5px;
   box-shadow: 0 1px 4px #6366f140;
 }
@@ -208,3 +207,55 @@ body {
   border-radius: 0.4rem;
   background: #23233a;
 }
+
+/* Hamburguesa solo en móviles */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  z-index: 100;
+}
+
+.hamburger span {
+  height: 4px;
+  width: 100%;
+  background: #a5b4fc;
+  margin: 5px 0;
+  border-radius: 2px;
+  transition: 0.3s;
+}
+
+/* Menú móvil oculto por defecto */
+.navbar-links.mobile {
+  display: none;
+  position: absolute;
+  top: 75px;
+  left: 0;
+  width: 100%;
+  background: #23233a;
+  flex-direction: column;
+  gap: 0;
+  box-shadow: 0 2px 12px #18181b40;
+  border-radius: 0 0 1rem 1rem;
+  padding: 1rem 0;
+  z-index: 99;
+}
+
+.navbar-links.mobile.open {
+  display: flex;
+}
+
+@media (max-width: 700px) {
+  .navbar-links {
+    display: none;
+  }
+  .hamburger {
+    display: flex;
+  }
+}
+
