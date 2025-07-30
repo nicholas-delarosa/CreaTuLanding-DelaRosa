@@ -27,16 +27,22 @@ function App() {
   };
 
   return (
-    <div className="app-container">
-      <NavBar cartCount={cart.length} />
-      <MusicPlayer />
-      <ItemListContainer
-        greeting="¡Bienvenido a la tienda!"
-        products={products}
-        addToCart={addToCart}
-      />
+    <div>
+      <h1>Aca va el router</h1>
     </div>
   )
+
+//   return (
+//     <div className="app-container">
+//       <NavBar cartCount={cart.length} />
+//       <MusicPlayer />
+//       <ItemListContainer
+//         greeting="¡Bienvenido a la tienda!"
+//         products={products}
+//         addToCart={addToCart}
+//       />
+//     </div>
+//   )
 }
 
 export default App
