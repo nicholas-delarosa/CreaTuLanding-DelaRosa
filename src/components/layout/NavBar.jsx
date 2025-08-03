@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import CartWidget from '../common/CartWidget';
+import { Link } from 'react-router';
 
 function NavBar({ cartCount }) {
     const [menuOpen, setMenuOpen] = useState(false);
@@ -8,27 +9,51 @@ function NavBar({ cartCount }) {
 
     return (
         <nav className="navbar" style={{ position: 'relative' }}>
-            <img
+            <Link to="/"><img
                 src="https://res.cloudinary.com/dw2auacau/image/upload/v1752717439/icon_uebyr0.png"
                 alt="Logo tienda"
                 className="navbar-logo"
-            />
+            /></Link>
             <button className="hamburger" onClick={handleHamburger} aria-label="Abrir menú">
                 <span style={{ transform: menuOpen ? 'rotate(45deg) translate(6px, 6px)' : 'none' }} />
                 <span style={{ opacity: menuOpen ? 0 : 1 }} />
                 <span style={{ transform: menuOpen ? 'rotate(-45deg) translate(7px, -7px)' : 'none' }} />
             </button>
             <ul className={`navbar-links mobile${menuOpen ? ' open' : ''}`}>
-                <li><a href="#" className="navbar-link" onClick={() => setMenuOpen(false)}>Inicio</a></li>
-                <li><a href="#" className="navbar-link" onClick={() => setMenuOpen(false)}>Productos</a></li>
-                <li><a href="#" className="navbar-link" onClick={() => setMenuOpen(false)}>Contacto</a></li>
+                <li>
+                    <Link to="/" className="navbar-link" onClick={() => setMenuOpen(false)}>
+                        Inicio
+                    </Link>
+                </li>
+                <li>
+                    <Link to="/categorias" className="navbar-link" onClick={() => setMenuOpen(false)}>
+                        Productos
+                    </Link>
+                </li>
+                <li>
+                    <Link to="#" className="navbar-link" onClick={() => setMenuOpen(false)}>
+                        Contacto
+                    </Link>
+                </li>
             </ul>
             <ul className="navbar-links">
-                <li><a href="#" className="navbar-link">Inicio</a></li>
-                <li><a href="#" className="navbar-link">Productos</a></li>
-                <li><a href="#" className="navbar-link">Contacto</a></li>
+                <li>
+                    <Link to="/" className="navbar-link">
+                        Inicio
+                    </Link>
+                </li>
+                <li>
+                    <Link to="/categorias" className="navbar-link">
+                        Productos
+                    </Link>
+                </li>
+                <li>
+                    <Link to="#" className="navbar-link">
+                        Contacto
+                    </Link>
+                </li>
             </ul>
-            <CartWidget cartCount={cartCount} />
+            <Link to="/carrito"><CartWidget cartCount={cartCount} /></Link>
         </nav>
     );
 }
