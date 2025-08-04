@@ -2,13 +2,16 @@ import { useParams } from "react-router";
 import { useState, useEffect } from "react";
 
 const ItemDetailContainer = ({ products, addToCart }) => {
-    const { id } = useParams();
+    const { nombre } = useParams();
     const [product, setProduct] = useState();
 
     useEffect(() => {
-        const element = products.find((producto) => producto.id === id);
+        const decodedName = decodeURIComponent(nombre).toLowerCase();
+        const element = products.find(
+            (producto) => producto.title.toLowerCase() === decodedName
+        );
         setProduct(element);
-    }, [id, products]);
+    }, [nombre, products]);
 
     if (!product) {
         return <div>Producto no encontrado.</div>;

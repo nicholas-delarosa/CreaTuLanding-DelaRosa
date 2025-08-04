@@ -15,7 +15,7 @@ function ProductCard({ product, addToCart }) {
             <button className="add-to-cart-btn" onClick={() => addToCart(product)}>
                 Agregar al carrito
             </button>
-            <Link to={`/producto/${encodeURIComponent(product.id)}`}>
+            <Link to={`/producto/${encodeURIComponent(product.title.toLowerCase())}`}>
                 <button className='view-details-btn'>
                     Ver detalles
                 </button>

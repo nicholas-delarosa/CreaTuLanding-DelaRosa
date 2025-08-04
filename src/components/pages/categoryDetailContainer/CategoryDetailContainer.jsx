@@ -1,4 +1,6 @@
 import { useParams } from "react-router";
+import { Link } from "react-router"; // Agrega esta línea
+
 function CategoryDetailContainer({ products, addToCart }) {
     const { categoria } = useParams();
     const filtered = products.filter(
@@ -25,6 +27,11 @@ function CategoryDetailContainer({ products, addToCart }) {
                             >
                                 {product.stock === 0 ? "Sin stock" : "Agregar al carrito"}
                             </button>
+                            <Link to={`/producto/${encodeURIComponent(product.title.toLowerCase())}`}>
+                                <button className='view-details-btn'>
+                                    Ver detalles
+                                </button>
+                            </Link>
                         </div>
                     ))
                 )}

@@ -71,7 +71,7 @@ function App() {
         <Route path='/categorias' element={[<MusicPlayer />, <CategoryList products={products} />]} />
         <Route path='/carrito' element={[<MusicPlayer />, <Carrito cart={cart} setCart={setCart} removeFromCart={removeFromCart} />]} />
         <Route path='/categorias/:categoria' element={[<MusicPlayer />, <CategoryDetailContainer products={products} addToCart={addToCart} />]} />
-        <Route path='/producto/:id' element={[<MusicPlayer />, <ItemDetailContainer products={products} addToCart={addToCart} />]} />
+        <Route path='/producto/:nombre' element={[<MusicPlayer />, <ItemDetailContainer products={products} addToCart={addToCart} />]} />
         <Route path='*' element={<NotFound404 />} />
       </Routes>
     </BrowserRouter>
