@@ -1,7 +1,7 @@
 export const products = [
   // Ropa
   {
-    id: "ropa-001",
+    // id: "ropa-001",
     title: "Remera",
     description: "Remera de algodón premium.",
     image: "https://res.cloudinary.com/dw2auacau/image/upload/v1752718169/remera-essential-negro-fa8d2313b500986c0a17005231430778-1024-1024_zbxxrl.jpg",
@@ -10,7 +10,7 @@ export const products = [
     stock: 50
   },
   {
-    id: "ropa-002",
+    // id: "ropa-002",
     title: "Pantalón",
     description: "Pantalón cómodo y moderno.",
     image: "https://res.cloudinary.com/dw2auacau/image/upload/v1752718281/pantalon.jpg",
@@ -19,7 +19,7 @@ export const products = [
     stock: 40
   },
   {
-    id: "ropa-003",
+    // id: "ropa-003",
     title: "Campera",
     description: "Campera abrigada para invierno.",
     image: "https://res.cloudinary.com/dw2auacau/image/upload/v1752718329/campera.png",
@@ -28,7 +28,7 @@ export const products = [
     stock: 20
   },
   {
-    id: "ropa-004",
+    // id: "ropa-004",
     title: "Gorra",
     description: "Gorra ajustable.",
     image: "https://res.cloudinary.com/dw2auacau/image/upload/v1752718376/gorra.png",
@@ -37,7 +37,7 @@ export const products = [
     stock: 60
   },
   {
-    id: "ropa-005",
+    // id: "ropa-005",
     title: "Buzo",
     description: "Buzo de polar suave.",
     image: "https://res.cloudinary.com/dw2auacau/image/upload/v1752718710/buzo.jpg",
@@ -48,7 +48,7 @@ export const products = [
 
   // Calzado
   {
-    id: "calzado-001",
+    // id: "calzado-001",
     title: "Zapatillas",
     description: "Zapatillas deportivas.",
     image: "https://res.cloudinary.com/dw2auacau/image/upload/v1752718778/zapatillas.jpg",
@@ -57,7 +57,7 @@ export const products = [
     stock: 30
   },
   {
-    id: "calzado-002",
+    // id: "calzado-002",
     title: "Botines",
     description: "Botines de cuero para fútbol.",
     image: "https://res.cloudinary.com/dw2auacau/image/upload/v1752718834/botines.jpg",
@@ -66,7 +66,7 @@ export const products = [
     stock: 25
   },
   {
-    id: "calzado-003",
+    // id: "calzado-003",
     title: "Sandalias",
     description: "Sandalias cómodas para verano.",
     image: "https://res.cloudinary.com/dw2auacau/image/upload/v1752718901/sandalias.webp",
@@ -75,7 +75,7 @@ export const products = [
     stock: 40
   },
   {
-    id: "calzado-004",
+    // id: "calzado-004",
     title: "Zapatos",
     description: "Zapatos elegantes de vestir.",
     image: "https://res.cloudinary.com/dw2auacau/image/upload/v1752719009/zapatos.jpg",
@@ -84,7 +84,7 @@ export const products = [
     stock: 18
   },
   {
-    id: "calzado-005",
+    // id: "calzado-005",
     title: "Ojotas",
     description: "Ojotas clásicas para la playa.",
     image: "https://res.cloudinary.com/dw2auacau/image/upload/v1752719047/ojotas.png",
@@ -95,7 +95,7 @@ export const products = [
 
   // Electrónica
   {
-    id: "electronica-001",
+    // id: "electronica-001",
     title: "Auriculares Bluetooth",
     description: "Auriculares inalámbricos con cancelación de ruido.",
     image: "https://res.cloudinary.com/dw2auacau/image/upload/v1752719100/auriculares_bt.jpg",
@@ -104,7 +104,7 @@ export const products = [
     stock: 15
   },
   {
-    id: "electronica-002",
+    // id: "electronica-002",
     title: "Teclado Mecánico",
     description: "Teclado mecánico RGB con switches azules.",
     image: "https://res.cloudinary.com/dw2auacau/image/upload/v1752719163/teclado_mecanico.jpg",
@@ -113,7 +113,7 @@ export const products = [
     stock: 10
   },
   {
-    id: "electronica-003",
+    // id: "electronica-003",
     title: "Mouse Gamer",
     description: "Mouse óptico de alta precisión.",
     image: "https://res.cloudinary.com/dw2auacau/image/upload/v1752719284/mouse_gamer.jpg",
@@ -122,7 +122,7 @@ export const products = [
     stock: 20
   },
   {
-    id: "electronica-004",
+    // id: "electronica-004",
     title: "Smartwatch",
     description: "Reloj inteligente con monitor de actividad.",
     image: "https://res.cloudinary.com/dw2auacau/image/upload/v1752719297/smartwatch.jpg",
@@ -131,7 +131,7 @@ export const products = [
     stock: 12
   },
   {
-    id: "electronica-005",
+    // id: "electronica-005",
     title: "Parlante Bluetooth",
     description: "Parlante portátil resistente al agua.",
     image: "https://res.cloudinary.com/dw2auacau/image/upload/v1752719345/parlante_bt.png",
@@ -142,7 +142,7 @@ export const products = [
 
   // Hogar
   {
-    id: "hogar-001",
+    // id: "hogar-001",
     title: "Almohada Viscoelástica",
     description: "Almohada ergonómica para mejor descanso.",
     image: "https://res.cloudinary.com/dw2auacau/image/upload/v1752719360/almohada_viscoelastica.webp",
@@ -151,7 +151,7 @@ export const products = [
     stock: 30
   },
   {
-    id: "hogar-002",
+    // id: "hogar-002",
     title: "Lámpara LED",
     description: "Lámpara de escritorio con luz regulable.",
     image: "https://res.cloudinary.com/dw2auacau/image/upload/v1752719554/lampara_led.webp",
@@ -160,7 +160,7 @@ export const products = [
     stock: 22
   },
   {
-    id: "hogar-003",
+    // id: "hogar-003",
     title: "Taza de Cerámica",
     description: "Taza decorativa para café o té.",
     image: "https://res.cloudinary.com/dw2auacau/image/upload/v1752719610/taza_ceramica.webp",
@@ -169,7 +169,7 @@ export const products = [
     stock: 60
   },
   {
-    id: "hogar-004",
+    // id: "hogar-004",
     title: "Manta Polar",
     description: "Manta suave y abrigada.",
     image: "https://res.cloudinary.com/dw2auacau/image/upload/v1752719637/manta.jpg",
@@ -178,7 +178,7 @@ export const products = [
     stock: 40
   },
   {
-    id: "hogar-005",
+    // id: "hogar-005",
     title: "Set de Cubiertos",
     description: "Set de cubiertos de acero inoxidable.",
     image: "https://res.cloudinary.com/dw2auacau/image/upload/v1752719654/cubiertos_no_oxido.jpg",
