@@ -13,6 +13,15 @@ import CategoryDetailContainer from './components/pages/categoryDetailContainer/
 import Carrito from './components/pages/carrito/Carrito'
 import CategoryList from './components/pages/categoryList/CategoryList'
 
+function Layout ({ children }){
+  return (
+    <>
+    <MusicPlayer />
+    {children}
+    </>
+  )
+}
+
 function App() {
   // Cargar carrito desde localStorage al iniciar
   const [cart, setCart] = useState(() => {
@@ -96,11 +105,62 @@ function App() {
       <Routes>
         {/* NOTA: Los arrays en los elementos de Route generan warnings sobre keys */}
         {/* Esto es intencional para evitar que MusicPlayer se recargue entre rutas */}
-        <Route path='/' element={[<MusicPlayer />, <ItemListContainer greeting={"¡Bienvenido a la tienda!"} products={products} addToCart={addToCart}/>]} />
-        <Route path='/categorias' element={[<MusicPlayer />, <CategoryList products={products} />]} />
-        <Route path='/carrito' element={[<MusicPlayer />, <Carrito cart={cart} setCart={setCart} removeFromCart={removeFromCart} />]} />
-        <Route path='/categorias/:categoria' element={[<MusicPlayer />, <CategoryDetailContainer products={products} addToCart={addToCart} />]} />
-        <Route path='/producto/:nombre' element={[<MusicPlayer />, <ItemDetailContainer products={products} addToCart={addToCart} />]} />
+        <Route
+          path='/'
+          element={
+            <Layout>
+              <ItemListContainer
+                greeting={"¡Bienvenido a la tienda!"}
+                products={products}
+                addToCart={addToCart}
+              />
+            </Layout>
+          }
+        />
+        <Route
+          path='/categorias'
+          element={
+            <Layout>
+              <CategoryList
+                products={products}
+              />
+            </Layout>
+          }
+        />
+        <Route
+          path='/carrito'
+          element={
+            <Layout>
+              <Carrito
+                cart={cart}
+                setCart={setCart}
+                removeFromCart={removeFromCart}
+              />
+            </Layout>
+          }
+        />
+        <Route
+          path='/categorias/:categoria'
+          element={
+            <Layout>
+              <CategoryDetailContainer
+                products={products}
+                addToCart={addToCart}
+              />
+            </Layout>
+          }
+        />
+        <Route
+          path='/producto/:nombre'
+          element={
+            <Layout>
+              <ItemDetailContainer
+                products={products}
+                addToCart={addToCart}
+              />
+            </Layout>
+          }
+        />
         <Route path='*' element={<NotFound404 />} />
       </Routes>
     </BrowserRouter>
