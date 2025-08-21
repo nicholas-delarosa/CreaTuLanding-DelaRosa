@@ -11,6 +11,7 @@ import ItemDetailContainer from './components/pages/itemDetailContainer/ItemDeta
 import CategoryDetailContainer from './components/pages/categoryDetailContainer/CategoryDetailContainer'
 import Carrito from './components/pages/carrito/Carrito'
 import CategoryList from './components/pages/categoryList/CategoryList'
+import Checkout from './components/pages/checkout/Checkout'
 
 function Layout ({ children }){
   return (
@@ -162,6 +163,17 @@ function App() {
                 cart={cart}
                 setCart={setCart}
                 removeFromCart={removeFromCart}
+              />
+            </Layout>
+          }
+        />
+        <Route
+          path='/checkout'
+          element={
+            <Layout>
+              <Checkout
+                cart={cart}
+                setCart={setCart}
               />
             </Layout>
           }

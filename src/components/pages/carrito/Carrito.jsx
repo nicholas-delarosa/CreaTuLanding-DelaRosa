@@ -1,3 +1,5 @@
+import { Link } from 'react-router';
+
 function Carrito({ cart, setCart, removeFromCart }) {
     // Agrupa productos por id y cuenta la cantidad
     const groupedCart = cart.reduce((acc, item) => {
@@ -15,9 +17,10 @@ function Carrito({ cart, setCart, removeFromCart }) {
         0
     );
 
-    const handlePay = () => {
-        alert("¡Gracias por tu compra!");
-        setCart([]);
+    const handleClearCart = () => {
+        if (window.confirm("¿Estás seguro de que quieres vaciar el carrito?")) {
+            setCart([]);
+        }
     };
 
     return (
@@ -58,9 +61,13 @@ function Carrito({ cart, setCart, removeFromCart }) {
                         <div className="total">
                             <strong>Total: ${total}</strong>
                         </div>
-                        <button className="pay-button" onClick={handlePay}>
-                            Pagar
-                        </button>
+                        <div className="cart-actions">
+                            <Link to="/checkout">
+                                <button className="pay-button">
+                                    Proceder al Checkout
+                                </button>
+                            </Link>
+                        </div>
                     </>
                 )}
             </main>
