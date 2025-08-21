@@ -4,9 +4,8 @@ import NavBar from './components/layout/NavBar'
 import ItemListContainer from './components/pages/ItemListContainer/ItemListContainer'
 import MusicPlayer from './components/common/MusicPlayer'
 import './index.css'
-// import { products as INITIAL_PRODUCTS } from './data/products'
 import { db } from './firebaseConfig'
-import { collection, getDocs } from 'firebase/firestore'
+import { collection, getDocs, doc, updateDoc, getDoc } from 'firebase/firestore'
 import NotFound404 from './components/pages/notFound404/NotFound404'
 import ItemDetailContainer from './components/pages/itemDetailContainer/ItemDetailContainer'
 import CategoryDetailContainer from './components/pages/categoryDetailContainer/CategoryDetailContainer'
@@ -28,7 +27,6 @@ function App() {
     const stored = localStorage.getItem('cart');
     return stored ? JSON.parse(stored) : [];
   });
-  // const [products, setProducts] = useState(INITIAL_PRODUCTS);
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -44,58 +42,89 @@ function App() {
     fetchProducts();
   }, []);
 
-  // Advertencia para desarrolladores sobre las keys en las rutas
-  useEffect(() => {
-    console.warn(
-      '⚠️ ADVERTENCIA DEL DESARROLLADOR:\n' +
-      'El error sobre las keys que aparece en las líneas de las rutas (Routes) no se puede "solucionar"\n' +
-      'ya que al agregar keys únicas, el MusicPlayer se recargaría en cada cambio de ruta,\n' +
-      'perdiendo la continuidad de la música. Esto es intencional para mantener la experiencia del usuario.\n' +
-      'Este warning de React puede ser ignorado de forma segura en este caso específico.'
-    );
-  }, []);
-
   // Guardar carrito en localStorage cada vez que cambie
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart));
   }, [cart]);
 
-  const addToCart = (product) => {
-    // Verifica si hay stock disponible
-    const prodIndex = products.findIndex(p => p.id === product.id);
-    if (products[prodIndex].stock > 0) {
-      // Disminuye el stock
-      const updatedProducts = [...products];
-      updatedProducts[prodIndex] = {
-        ...updatedProducts[prodIndex],
-        stock: updatedProducts[prodIndex].stock - 1
-      };
-      setProducts(updatedProducts);
-      setCart([...cart, product]);
-    } else {
-      alert("No hay stock disponible de este producto.");
+  const addToCart = async (product) => {
+    try {
+      // Obtener el documento actual del producto desde Firebase
+      const productRef = doc(db, "products", product.id);
+      const productSnap = await getDoc(productRef);
+      
+      if (productSnap.exists()) {
+        const currentProduct = productSnap.data();
+        
+        // Verificar si hay stock disponible
+        if (currentProduct.stock > 0) {
+          // Actualizar el stock en Firebase
+          await updateDoc(productRef, {
+            stock: currentProduct.stock - 1
+          });
+          
+          // Actualizar el estado local de productos
+          setProducts(prevProducts => 
+            prevProducts.map(p => 
+              p.id === product.id 
+                ? { ...p, stock: p.stock - 1 }
+                : p
+            )
+          );
+          
+          // Agregar producto al carrito
+          setCart(prevCart => [...prevCart, product]);
+          
+          console.log(`Stock actualizado en Firebase. Nuevo stock: ${currentProduct.stock - 1}`);
+        } else {
+          alert("No hay stock disponible de este producto.");
+        }
+      } else {
+        alert("Producto no encontrado en la base de datos.");
+      }
+    } catch (error) {
+      console.error("Error al actualizar el stock:", error);
+      alert("Error al procesar la compra. Intenta nuevamente.");
     }
   };
 
-  // Nueva función para borrar un producto del carrito
-  const removeFromCart = (productId) => {
-    // Encuentra el primer producto con ese id y lo elimina
-    const indexToRemove = cart.findIndex(item => item.id === productId);
-    if (indexToRemove !== -1) {
-      const updatedCart = [...cart];
-      updatedCart.splice(indexToRemove, 1);
-      setCart(updatedCart);
+  // Función para devolver stock cuando se elimina del carrito
+  const removeFromCart = async (productId) => {
+    try {
+      // Encuentra el primer producto con ese id y lo elimina del carrito
+      const indexToRemove = cart.findIndex(item => item.id === productId);
+      if (indexToRemove !== -1) {
+        const updatedCart = [...cart];
+        updatedCart.splice(indexToRemove, 1);
+        setCart(updatedCart);
 
-      // Devuelve el stock al producto
-      const prodIndex = products.findIndex(p => p.id === productId);
-      if (prodIndex !== -1) {
-        const updatedProducts = [...products];
-        updatedProducts[prodIndex] = {
-          ...updatedProducts[prodIndex],
-          stock: updatedProducts[prodIndex].stock + 1
-        };
-        setProducts(updatedProducts);
+        // Obtener el documento actual del producto desde Firebase
+        const productRef = doc(db, "products", productId);
+        const productSnap = await getDoc(productRef);
+        
+        if (productSnap.exists()) {
+          const currentProduct = productSnap.data();
+          
+          // Devolver el stock en Firebase
+          await updateDoc(productRef, {
+            stock: currentProduct.stock + 1
+          });
+          
+          // Actualizar el estado local de productos
+          setProducts(prevProducts => 
+            prevProducts.map(p => 
+              p.id === productId 
+                ? { ...p, stock: p.stock + 1 }
+                : p
+            )
+          );
+          
+          console.log(`Stock devuelto en Firebase. Nuevo stock: ${currentProduct.stock + 1}`);
+        }
       }
+    } catch (error) {
+      console.error("Error al devolver el stock:", error);
+      alert("Error al eliminar el producto del carrito.");
     }
   };
 
@@ -103,8 +132,6 @@ function App() {
     <BrowserRouter>
       <NavBar cartCount={cart.length} />
       <Routes>
-        {/* NOTA: Los arrays en los elementos de Route generan warnings sobre keys */}
-        {/* Esto es intencional para evitar que MusicPlayer se recargue entre rutas */}
         <Route
           path='/'
           element={
