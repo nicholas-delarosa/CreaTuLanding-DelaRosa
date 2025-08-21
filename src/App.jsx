@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { BrowserRouter, Routes, Route} from 'react-router'
 import NavBar from './components/layout/NavBar'
-import ItemListContainer from './components/pages/itemListContainer/ItemListContainer'
+import ItemListContainer from './components/pages/ItemListContainer/ItemListContainer'
 import MusicPlayer from './components/common/MusicPlayer'
 import './index.css'
 import { db } from './firebaseConfig'
