@@ -42,8 +42,6 @@ function AppContent() {
             <Layout>
               <ItemListContainer
                 greeting={"¡Bienvenido a la tienda!"}
-                products={products}
-                addToCart={addToCart}
               />
             </Layout>
           }
@@ -87,7 +85,6 @@ function AppContent() {
             <Layout>
               <CategoryDetailContainer
                 products={products}
-                addToCart={addToCart}
               />
             </Layout>
           }
@@ -98,7 +95,6 @@ function AppContent() {
             <Layout>
               <ItemDetailContainer
                 products={products}
-                addToCart={addToCart}
               />
             </Layout>
           }

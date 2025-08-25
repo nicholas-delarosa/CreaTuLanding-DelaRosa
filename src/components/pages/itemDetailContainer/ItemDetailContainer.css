@@ -1,0 +1,68 @@
+.item-detail-container {
+    margin: 2rem auto;
+    max-width: 400px;
+}
+
+.quantity-controls {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.quantity-selector {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.quantity-btn {
+    padding: 0.5rem 1rem;
+    color: #f3f4f6;
+    border: none;
+    border-radius: 0.3rem;
+    font-weight: bold;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.quantity-btn.decrement {
+    background: #ef4444;
+}
+
+.quantity-btn.increment {
+    background: #10b981;
+}
+
+.quantity-btn:disabled {
+    background: #64748b;
+    cursor: not-allowed;
+}
+
+.quantity-display {
+    font-size: 1.5rem;
+    font-weight: bold;
+    min-width: 3rem;
+    text-align: center;
+}
+
+.price-total {
+    margin-bottom: 1rem;
+    color: #94a3b8;
+    font-size: 0.9rem;
+}
+
+.add-to-cart-full {
+    width: 100%;
+    max-width: 250px;
+}
+
+.out-of-stock {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.out-of-stock-message {
+    color: #ef4444;
+    font-weight: bold;
+}
