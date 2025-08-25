@@ -220,7 +220,7 @@ Este proyecto está bajo la Licencia MIT. Ver el archivo [LICENSE](LICENSE) para
 ## 👨‍💻 Autor
 
 **Tu Nombre**
-- GitHub: [@tu-usuario](https://github.com/nicholas-delarosa)
+- GitHub: [Nicholas De la Rosa](https://github.com/nicholas-delarosa)
 - Email: nicholasandresdelarosarivera@hotmail.com
 
 ---
