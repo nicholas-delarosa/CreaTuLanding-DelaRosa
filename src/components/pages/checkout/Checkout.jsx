@@ -1,30 +1,23 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { db } from "../../../firebaseConfig";
 import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
+import { CartContext } from '../../../context/CartContext';
 import './Checkout.css';
 
-const Checkout = ({ cart, setCart }) => {
+const Checkout = () => {
+  const { 
+    cart, 
+    getTotalAmount, 
+    getGroupedCart, 
+    resetCart 
+  } = useContext(CartContext);
+
   const [user, setUser] = useState({
     nombre: "",
     telefono: "",
     email: "",
   });
   const [orderId, setOrderId] = useState(null);
-
-  // Calcular el total del carrito
-  const getTotalAmount = () => {
-    const groupedCart = cart.reduce((acc, item) => {
-      const found = acc.find((prod) => prod.id === item.id);
-      if (found) {
-        found.qty += 1;
-      } else {
-        acc.push({ ...item, qty: 1 });
-      }
-      return acc;
-    }, []);
-
-    return groupedCart.reduce((sum, item) => sum + item.price * item.qty, 0);
-  };
 
   const handleSubmit = async (evento) => {
     evento.preventDefault();
@@ -35,18 +28,10 @@ const Checkout = ({ cart, setCart }) => {
     }
 
     try {
-      // Agrupar productos para la orden
-      const groupedCart = cart.reduce((acc, item) => {
-        const found = acc.find((prod) => prod.id === item.id);
-        if (found) {
-          found.cantidad += 1;
-        } else {
-          acc.push({ ...item, cantidad: 1 });
-        }
-        return acc;
-      }, []);
-
+      // Usar la función del contexto para agrupar productos
+      const groupedCart = getGroupedCart();
       let total = getTotalAmount();
+      
       let objetoCompra = {
         buyer: user,
         items: groupedCart,
@@ -59,16 +44,10 @@ const Checkout = ({ cart, setCart }) => {
       let res = await addDoc(ordersCollection, objetoCompra);
       
       setOrderId(res.id);
-      setCart([]); // Limpiar carrito
+      resetCart(); // Usar resetCart del contexto (no devuelve stock porque ya se descontó al agregar)
 
-      // Actualizar stock de productos comprados
-      let productosCollection = collection(db, "products");
-      for (const elemento of groupedCart) {
-        let productRef = doc(productosCollection, elemento.id);
-        await updateDoc(productRef, { 
-          stock: elemento.stock - elemento.cantidad 
-        });
-      }
+      // Nota: No necesitamos actualizar stock aquí porque ya se descontó al agregar al carrito
+      // El stock ya fue actualizado en Firebase cuando se agregaron los productos
 
     } catch (error) {
       alert("Ocurrió un error al procesar la compra");
@@ -80,16 +59,8 @@ const Checkout = ({ cart, setCart }) => {
     setUser({ ...user, [evento.target.name]: evento.target.value });
   };
 
-  // Agrupar carrito para mostrar
-  const groupedCart = cart.reduce((acc, item) => {
-    const found = acc.find((prod) => prod.id === item.id);
-    if (found) {
-      found.qty += 1;
-    } else {
-      acc.push({ ...item, qty: 1 });
-    }
-    return acc;
-  }, []);
+  // Usar la función del contexto para agrupar
+  const groupedCart = getGroupedCart();
 
   return (
     <section className="checkout-container card">

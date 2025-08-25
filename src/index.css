@@ -73,7 +73,6 @@ h2 {
 }
 
 .pay-button {
-  margin-top: 1rem;
   padding: 0.6rem 1.5rem;
   background: linear-gradient(90deg, #0ea5e9 0%, #6366f1 100%);
   color: #f3f4f6;
@@ -290,3 +289,24 @@ h2 {
   }
 }
 
+.cart-actions {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+  gap: 1rem;
+  flex-direction: row-reverse;
+  justify-content: center;
+}
+
+.remove-btn-cart {
+  background: #ef4444;
+  background-color : #ef4444;
+  color: #fff;
+  border: none;
+  border-radius: 0.4rem;
+  padding: 0.6rem 1.5rem;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1rem;
+  transition: background 0.2s;
+}

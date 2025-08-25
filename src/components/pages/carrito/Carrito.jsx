@@ -1,25 +1,23 @@
+import { useContext } from 'react';
 import { Link } from 'react-router';
+import { CartContext } from '../../../context/CartContext';
 
-function Carrito({ cart, setCart, removeFromCart }) {
-    // Agrupa productos por id y cuenta la cantidad
-    const groupedCart = cart.reduce((acc, item) => {
-        const found = acc.find((prod) => prod.id === item.id);
-        if (found) {
-            found.qty += 1;
-        } else {
-            acc.push({ ...item, qty: 1 });
-        }
-        return acc;
-    }, []);
+function Carrito() {
+    const { 
+        cart, 
+        removeFromCart, 
+        getTotalAmount, 
+        getGroupedCart,
+        clearCartWithStockReturn 
+    } = useContext(CartContext);
 
-    const total = groupedCart.reduce(
-        (sum, item) => sum + item.price * item.qty,
-        0
-    );
+    // Usar la función del contexto que agrupa productos
+    const groupedCart = getGroupedCart();
+    const total = getTotalAmount();
 
-    const handleClearCart = () => {
+    const handleClearCart = async () => {
         if (window.confirm("¿Estás seguro de que quieres vaciar el carrito?")) {
-            setCart([]);
+            await clearCartWithStockReturn();
         }
     };
 
@@ -62,6 +60,9 @@ function Carrito({ cart, setCart, removeFromCart }) {
                             <strong>Total: ${total}</strong>
                         </div>
                         <div className="cart-actions">
+                            <button className="remove-btn-cart" onClick={handleClearCart}>
+                                Vaciar Carrito
+                            </button>
                             <Link to="/checkout">
                                 <button className="pay-button">
                                     Proceder al Checkout
